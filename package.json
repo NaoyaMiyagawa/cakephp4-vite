@@ -18,5 +18,8 @@
     "bugs": {
         "url": "https://github.com/NaoyaMiyagawa/cakephp4-vite/issues"
     },
-    "homepage": "https://github.com/NaoyaMiyagawa/cakephp4-vite#readme"
+    "homepage": "https://github.com/NaoyaMiyagawa/cakephp4-vite#readme",
+    "dependencies": {
+        "vite": "^2.8.4"
+    }
 }
