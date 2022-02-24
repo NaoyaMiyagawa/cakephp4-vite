@@ -46,3 +46,5 @@ nbproject/*
 .sass-cache/
 # node
 node_modules
+#
+webroot/js/*
