@@ -7,6 +7,9 @@
         "test": "tests"
     },
     "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "server": "vite preview",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -20,6 +23,15 @@
     },
     "homepage": "https://github.com/NaoyaMiyagawa/cakephp4-vite#readme",
     "dependencies": {
+        "autoprefixer": "^10.4.2",
+        "glob": "^7.2.0",
+        "path": "^0.12.7",
+        "postcss": "^8.4.6",
+        "tailwindcss": "^3.0.23",
         "vite": "^2.8.4"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/node": "^17.0.19"
     }
 }
