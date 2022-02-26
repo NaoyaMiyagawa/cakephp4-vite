@@ -1,5 +1,6 @@
 import "@/css/tailwind.css";
 import "@/css/Hoges/hoge.css";
+// import "virtual:windi.css";
 
 export const hoge = () => {
     console.log("hoge");
@@ -8,4 +9,4 @@ export const hoge = () => {
 hoge();
 setTimeout(() => {
     hoge();
-}, 200);
+}, 300);

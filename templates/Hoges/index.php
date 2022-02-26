@@ -23,8 +23,35 @@ $this->Vite->script('Hoges/hoge', ['block' => true]);
 
 <body>
     <?= $this->element('hoge') ?>
-    <div class="py-10 bg-blue-500">hoge</div>
-    <p class="p-4 text-red-500 bg-yellow-700 ">aaaaaaaaaa</p>
+    <div class="p-4 bg-green-100">hoge</div>
+    <div class="p-4 bg-green-200">hoge</div>
+    <div class="p-4 bg-green-300">hoge</div>
+    <div class="p-4 bg-green-400">hoge</div>
+    <div class="p-4 bg-green-500">hoge</div>
+    <div class="p-4 bg-green-600">hoge</div>
+    <div class="p-4 bg-green-700">hoge</div>
+    <div class="p-4 bg-green-800">hoge</div>
+    <div class="p-4 bg-green-900">hoge</div>
+
+    <div class="p-4 bg-blue-100">hoge</div>
+    <div class="p-4 bg-blue-200">hoge</div>
+    <div class="p-4 bg-blue-300">hoge</div>
+    <div class="p-4 bg-blue-400">hoge</div>
+    <div class="p-4 bg-blue-500">hoge</div>
+    <div class="p-4 bg-blue-600">hoge</div>
+    <div class="p-4 bg-blue-700">hoge</div>
+    <div class="p-4 bg-blue-800">hoge</div>
+    <div class="p-4 bg-blue-900">hoge</div>
+
+    <div class="p-4 bg-orange-100">hoge</div>
+    <div class="p-4 bg-orange-200">hoge</div>
+    <div class="p-4 bg-orange-300">hoge</div>
+    <div class="p-4 bg-orange-400">hoge</div>
+    <div class="p-4 bg-orange-500">hoge</div>
+    <div class="p-4 bg-orange-600">hoge</div>
+    <div class="p-4 bg-orange-700">hoge</div>
+    <div class="p-4 bg-orange-800">hoge</div>
+    <div class="p-4 bg-orange-900">hoge</div>
 
     <?= $this->fetch('script') ?>
 </body>
