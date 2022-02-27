@@ -16,7 +16,6 @@ class ViteHelper extends Helper
     private const VITE_BASE_URL = 'http://localhost:3000/';
     private const VITE_CLIENT_PATH = '@vite/client';
     private const JS_PREBUILD_PATH = 'resources/js/';
-    private const JS_PROD_PATH = 'webroot/js';
 
     /**
      * @var string[]
@@ -30,7 +29,7 @@ class ViteHelper extends Helper
     /** @var array manifest.json */
     protected $manifest = [];
 
-    protected $isViteClientEmitted = false;
+    protected $hasViteClientEmitted = false;
 
     /**
      * initialize
@@ -44,18 +43,24 @@ class ViteHelper extends Helper
         }
     }
 
-
-    public function script(string $name, $options = []): ?string
+    /**
+     * @param string $name
+     * @param ?array $options
+     * @return string
+     */
+    public function script(string $name, $options = []): string
     {
         if (Configure::read('debug')) {
+            $filePath = self::VITE_BASE_URL . self::JS_PREBUILD_PATH . $name;
+            $scriptTag = '';
             $options['type'] = 'module';
-            // @TODO: add auto vite client tag
-            // if (!$this->isViteClientEmitted) {
-            //     $this->isViteClientEmitted = true;
-            // }
 
-            $filePath = self::VITE_BASE_URL . self::JS_PREBUILD_PATH . $name;;
-            return $this->Html->script($filePath, $options);
+            if (!$this->hasViteClientEmitted) {
+                $this->hasViteClientEmitted = true;
+                $scriptTag .= $this->Html->script(self::VITE_BASE_URL . self::VITE_CLIENT_PATH, $options) . '\n';
+            }
+
+            return $scriptTag . (string)$this->Html->script($filePath, $options);
         }
 
         $asset = $this->getAssetOnManifest($name);
@@ -65,10 +70,18 @@ class ViteHelper extends Helper
 
         return
             (string)$this->Html->script($asset['file'], $options)
-            . (string)$this->css($asset);
+            . (string)$this->css($asset, $options);
     }
 
+    ##############################################################################
+    # Private Methods
+    ##############################################################################
 
+    /**
+     * @param array asset
+     * @param ?array $options
+     * @return string
+     */
     private function css(array $asset, $options = []): string
     {
         if (empty($asset['css'])) {

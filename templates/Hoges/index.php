@@ -4,10 +4,9 @@
  * @var \App\View\AppView $this
  */
 
-use Cake\Core\Configure;
 
 $this->disableAutoLayout();
-// $this->Vite->script('Hoges/hoge', ['block' => true]);
+$this->Vite->script('Hoges/hoge', ['block' => true]);
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +55,6 @@ $this->disableAutoLayout();
     <div class="p-4 bg-orange-900"></div> -->
 
     <?= $this->fetch('script') ?>
-    <?php if (Configure::read('debug')) : ?>
-        <?= $this->Html->script('http://localhost:3000/@vite/client', ['type' => 'module']) ?>
-    <?php endif; ?>
-    <?= $this->Vite->script('Hoges/hoge'); ?>
 </body>
 
 </html>
