@@ -34,7 +34,9 @@ $this->Vite->script('Hoges/hoge', ['block' => true]);
     <div class="p-4 bg-green-800"></div>
     <div class="p-4 bg-green-900"></div>
 
-    <!-- <div class="p-4 bg-blue-100"></div>
+    <div id="app"></div>
+
+    <!-- <div class="p-4 bg-blue-100 "></div>
     <div class="p-4 bg-blue-200"></div>
     <div class="p-4 bg-blue-300"></div>
     <div class="p-4 bg-blue-400"></div>

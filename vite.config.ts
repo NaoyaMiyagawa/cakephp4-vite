@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import path from "path";
 import glob from "glob";
 import liveReload from "vite-plugin-live-reload";
+import vue from "@vitejs/plugin-vue";
 
 // entrypoints to bundle
 const entries = {};
@@ -12,32 +13,32 @@ const distDir = `./webroot/js`;
 
 const targetPaths = glob.sync("**/*.+(js|ts)", { cwd: srcDir });
 targetPaths.map((key) => {
-    const srcFilepath = path.join(srcDir, key);
-    // replace path for typescript
-    const distFilepath = key; //.replace(/.ts$/, "");
-    // register entrypoint
-    entries[distFilepath] = srcFilepath;
+  const srcFilepath = path.join(srcDir, key);
+  // replace path for typescript
+  const distFilepath = key; //.replace(/.ts$/, "");
+  // register entrypoint
+  entries[distFilepath] = srcFilepath;
 });
 
 console.log("🚀 > entries", entries);
 
 export default defineConfig({
-    plugins: [
-        //
-        liveReload(["./templates/**/*.php"], { alwaysReload: true }),
-    ],
-    build: {
-        outDir: distDir,
-        emptyOutDir: true,
-        assetsDir: "",
-        manifest: true,
-        rollupOptions: {
-            input: entries,
-        },
+  plugins: [
+    vue(),
+    liveReload(["./templates/**/*.php"], { alwaysReload: true }),
+  ],
+  build: {
+    outDir: distDir,
+    emptyOutDir: true,
+    assetsDir: "",
+    manifest: true,
+    rollupOptions: {
+      input: entries,
     },
-    resolve: {
-        alias: {
-            "@": "/resources",
-        },
+  },
+  resolve: {
+    alias: {
+      "@": "/resources",
     },
+  },
 });
