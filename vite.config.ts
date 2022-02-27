@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import path from "path";
 import glob from "glob";
+import liveReload from "vite-plugin-live-reload";
 
 // entrypoints to bundle
 const entries = {};
@@ -21,6 +22,10 @@ targetPaths.map((key) => {
 console.log("🚀 > entries", entries);
 
 export default defineConfig({
+    plugins: [
+        //
+        liveReload(["./templates/**/*.php"], { alwaysReload: true }),
+    ],
     build: {
         outDir: distDir,
         emptyOutDir: true,

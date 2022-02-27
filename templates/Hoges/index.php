@@ -5,7 +5,7 @@
  */
 
 $this->disableAutoLayout();
-$this->Vite->script('Hoges/hoge', ['block' => true]);
+// $this->Vite->script('Hoges/hoge', ['block' => true]);
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +54,8 @@ $this->Vite->script('Hoges/hoge', ['block' => true]);
     <div class="p-4 bg-orange-900">hoge</div>
 
     <?= $this->fetch('script') ?>
+    <?= $this->Html->script('http://localhost:3000/@vite/client', ['type' => 'module']) ?>
+    <?= $this->Vite->script('Hoges/hoge'); ?>
 </body>
 
 </html>

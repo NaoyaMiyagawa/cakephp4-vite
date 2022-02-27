@@ -1,4 +1,4 @@
-// import "@/css/tailwind.css";
+import "@/css/tailwind.css";
 import "@/css/Hoges/hoge.css";
 
 export const hoge = () => {
