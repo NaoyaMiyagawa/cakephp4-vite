@@ -1,0 +1,8 @@
+.hoge {
+    color: red;
+    background-color: violet;
+    padding: 10px;
+    button {
+        @apply w-32 p-4 bg-blue-600 border rounded-full text-lime-50 hover:-translate-y-1 active:translate-y-0;
+    }
+}
