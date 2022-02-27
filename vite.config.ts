@@ -18,7 +18,7 @@ targetPaths.map((key) => {
     entries[distFilepath] = srcFilepath;
 });
 
-// console.log("🚀 > entries", entries);
+console.log("🚀 > entries", entries);
 
 export default defineConfig({
     build: {

@@ -1,12 +1,12 @@
-import "@/css/tailwind.css";
+// import "@/css/tailwind.css";
 import "@/css/Hoges/hoge.css";
-// import "virtual:windi.css";
 
 export const hoge = () => {
-    console.log("hoge");
+    console.log(`hoge ${count}`);
 };
 
-hoge();
-setTimeout(() => {
+let count = 0;
+setInterval(() => {
     hoge();
-}, 300);
+    count++;
+}, 1000);

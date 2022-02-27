@@ -5,4 +5,4 @@
  */
 ?>
 
-<div class="bg-orange-400">hoge from element</div>
+<div class="hoge">hoge from element</div>
