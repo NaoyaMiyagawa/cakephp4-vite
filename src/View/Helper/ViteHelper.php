@@ -13,15 +13,17 @@ use RuntimeException;
  */
 class ViteHelper extends Helper
 {
-    private const VITE_BASE_URL = 'http://localhost:3000/';
-    private const VITE_CLIENT_PATH = '@vite/client';
+    /** vite server */
+    private const VITE_SERVER_URL = 'http://localhost:3000/';
+    /** vite client */
+    private const VITE_CLIENT = self::VITE_SERVER_URL . '@vite/client';
+    /** js pre-build assets path */
     private const JS_PREBUILD_PATH = 'resources/js/';
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $helpers = ['Html'];
 
+    /** @var string[] */
     protected $_defaultConfig = [
         'manifestFile' => WWW_ROOT . 'js/manifest.json',
     ];
@@ -29,6 +31,7 @@ class ViteHelper extends Helper
     /** @var array manifest.json */
     protected $manifest = [];
 
+    /** @var bool whether emitted vite client script */
     protected $hasViteClientEmitted = false;
 
     /**
@@ -44,6 +47,7 @@ class ViteHelper extends Helper
     }
 
     /**
+     * Creates a script element for vite-bundled JS file.
      * @param string $name
      * @param ?array $options
      * @return string
@@ -51,13 +55,13 @@ class ViteHelper extends Helper
     public function script(string $name, $options = []): string
     {
         if (Configure::read('debug')) {
-            $filePath = self::VITE_BASE_URL . self::JS_PREBUILD_PATH . $name;
+            $filePath = self::VITE_SERVER_URL . self::JS_PREBUILD_PATH . $name;
             $scriptTag = '';
             $options['type'] = 'module';
 
             if (!$this->hasViteClientEmitted) {
                 $this->hasViteClientEmitted = true;
-                $scriptTag .= $this->Html->script(self::VITE_BASE_URL . self::VITE_CLIENT_PATH, $options) . '\n';
+                $scriptTag .= $this->Html->script(self::VITE_CLIENT, $options) . '\n';
             }
 
             return $scriptTag . (string)$this->Html->script($filePath, $options);
@@ -78,6 +82,7 @@ class ViteHelper extends Helper
     ##############################################################################
 
     /**
+     * Creates a link element for vite-bundled CSS stylesheets.
      * @param array asset
      * @param ?array $options
      * @return string
@@ -102,15 +107,14 @@ class ViteHelper extends Helper
      */
     private function getAssetOnManifest(string $name): array
     {
-        $pathInJs = self::JS_PREBUILD_PATH . $name . '.js';
         $pathInTs = self::JS_PREBUILD_PATH . $name . '.ts';
-
-        if (isset($this->manifest[$pathInJs])) {
-            return $this->manifest[$pathInJs];
-        }
-
         if (isset($this->manifest[$pathInTs])) {
             return $this->manifest[$pathInTs];
+        }
+
+        $pathInJs = self::JS_PREBUILD_PATH . $name . '.js';
+        if (isset($this->manifest[$pathInJs])) {
+            return $this->manifest[$pathInJs];
         }
 
         throw new RuntimeException("No known asset with `{$name}`");
