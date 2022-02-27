@@ -4,6 +4,8 @@
  * @var \App\View\AppView $this
  */
 
+use Cake\Core\Configure;
+
 $this->disableAutoLayout();
 // $this->Vite->script('Hoges/hoge', ['block' => true]);
 ?>
@@ -23,38 +25,40 @@ $this->disableAutoLayout();
 
 <body>
     <?= $this->element('hoge') ?>
-    <div class="p-4 bg-green-100">hoge</div>
-    <div class="p-4 bg-green-200">hoge</div>
-    <div class="p-4 bg-green-300">hoge</div>
-    <div class="p-4 bg-green-400">hoge</div>
-    <div class="p-4 bg-green-500">hoge</div>
-    <div class="p-4 bg-green-600">hoge</div>
-    <div class="p-4 bg-green-700">hoge</div>
-    <div class="p-4 bg-green-800">hoge</div>
-    <div class="p-4 bg-green-900">hoge</div>
+    <div class="p-4 bg-green-100"></div>
+    <div class="p-4 bg-green-200"></div>
+    <div class="p-4 bg-green-300"></div>
+    <div class="p-4 bg-green-400"></div>
+    <div class="p-4 bg-green-500"></div>
+    <div class="p-4 bg-green-600"></div>
+    <div class="p-4 bg-green-700"></div>
+    <div class="p-4 bg-green-800"></div>
+    <div class="p-4 bg-green-900"></div>
 
-    <div class="p-4 bg-blue-100">hoge</div>
-    <div class="p-4 bg-blue-200">hoge</div>
-    <div class="p-4 bg-blue-300">hoge</div>
-    <div class="p-4 bg-blue-400">hoge</div>
-    <div class="p-4 bg-blue-500">hoge</div>
-    <div class="p-4 bg-blue-600">hoge</div>
-    <div class="p-4 bg-blue-700">hoge</div>
-    <div class="p-4 bg-blue-800">hoge</div>
-    <div class="p-4 bg-blue-900">hoge</div>
+    <!-- <div class="p-4 bg-blue-100"></div>
+    <div class="p-4 bg-blue-200"></div>
+    <div class="p-4 bg-blue-300"></div>
+    <div class="p-4 bg-blue-400"></div>
+    <div class="p-4 bg-blue-500"></div>
+    <div class="p-4 bg-blue-600"></div>
+    <div class="p-4 bg-blue-700"></div>
+    <div class="p-4 bg-blue-800"></div>
+    <div class="p-4 bg-blue-900"></div> -->
 
-    <div class="p-4 bg-orange-100">hoge</div>
-    <div class="p-4 bg-orange-200">hoge</div>
-    <div class="p-4 bg-orange-300">hoge</div>
-    <div class="p-4 bg-orange-400">hoge</div>
-    <div class="p-4 bg-orange-500">hoge</div>
-    <div class="p-4 bg-orange-600">hoge</div>
-    <div class="p-4 bg-orange-700">hoge</div>
-    <div class="p-4 bg-orange-800">hoge</div>
-    <div class="p-4 bg-orange-900">hoge</div>
+    <!-- <div class="p-4 bg-orange-100"></div>
+    <div class="p-4 bg-orange-200"></div>
+    <div class="p-4 bg-orange-300"></div>
+    <div class="p-4 bg-orange-400"></div>
+    <div class="p-4 bg-orange-500"></div>
+    <div class="p-4 bg-orange-600"></div>
+    <div class="p-4 bg-orange-700"></div>
+    <div class="p-4 bg-orange-800"></div>
+    <div class="p-4 bg-orange-900"></div> -->
 
     <?= $this->fetch('script') ?>
-    <?= $this->Html->script('http://localhost:3000/@vite/client', ['type' => 'module']) ?>
+    <?php if (Configure::read('debug')) : ?>
+        <?= $this->Html->script('http://localhost:3000/@vite/client', ['type' => 'module']) ?>
+    <?php endif; ?>
     <?= $this->Vite->script('Hoges/hoge'); ?>
 </body>
 

@@ -14,7 +14,7 @@ const targetPaths = glob.sync("**/*.+(js|ts)", { cwd: srcDir });
 targetPaths.map((key) => {
     const srcFilepath = path.join(srcDir, key);
     // replace path for typescript
-    const distFilepath = key.replace(/.ts$/, "");
+    const distFilepath = key; //.replace(/.ts$/, "");
     // register entrypoint
     entries[distFilepath] = srcFilepath;
 });

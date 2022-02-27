@@ -14,7 +14,8 @@ use RuntimeException;
 class ViteHelper extends Helper
 {
     private const VITE_BASE_URL = 'http://localhost:3000/';
-    private const TS_BASE_PATH = 'resources/js/';
+    private const VITE_CLIENT_PATH = '@vite/client';
+    private const JS_PREBUILD_PATH = 'resources/js/';
     private const JS_PROD_PATH = 'webroot/js';
 
     /**
@@ -26,81 +27,100 @@ class ViteHelper extends Helper
         'manifestFile' => WWW_ROOT . 'js/manifest.json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array manifest.json */
     protected $manifest = [];
 
+    protected $isViteClientEmitted = false;
+
+    /**
+     * initialize
+     */
     public function initialize(array $config): void
     {
         parent::initialize($config);
 
         if (!Configure::read('debug')) {
-            $manifestFile = $this->getConfig('manifestFile');
-            $contents = file_get_contents($manifestFile);
-            if (!$contents) {
-                throw new RuntimeException("Could not read manifest file `{$manifestFile}`");
-            }
-            $data = json_decode($contents, true);
-            if (json_last_error()) {
-                throw new RuntimeException("Could not parse JSON in `{$manifestFile}`");
-            }
-            $this->manifest = $data;
+            $this->manifest = $this->readManifestData();
         }
     }
+
 
     public function script(string $name, $options = []): ?string
     {
         if (Configure::read('debug')) {
             $options['type'] = 'module';
-            return $this->Html->script($this->convertSrcPath($name), $options);
+            // @TODO: add auto vite client tag
+            // if (!$this->isViteClientEmitted) {
+            //     $this->isViteClientEmitted = true;
+            // }
+
+            $filePath = self::VITE_BASE_URL . self::JS_PREBUILD_PATH . $name;;
+            return $this->Html->script($filePath, $options);
         }
 
-        $name = $this->convertToPathForManifest($name);
-
-        if (!isset($this->manifest[$name])) {
-            throw new RuntimeException("No known asset with `{$name}`");
-        }
-        $asset = $this->manifest[$name];
+        $asset = $this->getAssetOnManifest($name);
         if (empty($asset['file'])) {
             throw new RuntimeException("The `{$name}` asset has no file attribute in the manifest.");
         }
 
         return
             (string)$this->Html->script($asset['file'], $options)
-            . (string)$this->css($name, $options);
+            . (string)$this->css($asset);
     }
 
-    public function css(string $name, $options = []): ?string
+
+    private function css(array $asset, $options = []): string
     {
-        if (!isset($this->manifest[$name])) {
-            throw new RuntimeException("No known asset with `{$name}`");
-        }
-        $asset = $this->manifest[$name];
         if (empty($asset['css'])) {
-            throw new RuntimeException("The `{$name}` asset has no css attribute in the manifest.");
+            return '';
         }
 
-        $css = [];
-        foreach ($asset['css'] as $file) {
-            $css[] = $this->Html->css('/js/' . $file, $options);
+        $cssTags = [];
+        foreach ($asset['css'] as $css) {
+            $cssTags[] = (string)$this->Html->css('/js/' . $css, $options);
         }
 
-        return implode("\n", $css);
+        return implode("\n", $cssTags);
     }
 
-
-    private function convertSrcPath(string $name): string
+    /**
+     * Get asset path object from manifest data
+     * @return array
+     */
+    private function getAssetOnManifest(string $name): array
     {
-        if (Configure::read('debug')) {
-            return self::VITE_BASE_URL . self::TS_BASE_PATH . $name;
+        $pathInJs = self::JS_PREBUILD_PATH . $name . '.js';
+        $pathInTs = self::JS_PREBUILD_PATH . $name . '.ts';
+
+        if (isset($this->manifest[$pathInJs])) {
+            return $this->manifest[$pathInJs];
         }
 
-        return self::JS_PROD_PATH . $name;
+        if (isset($this->manifest[$pathInTs])) {
+            return $this->manifest[$pathInTs];
+        }
+
+        throw new RuntimeException("No known asset with `{$name}`");
     }
 
-    private function convertToPathForManifest(string $name): string
+    /**
+     * Load manifest file and return decoded data
+     * @return array
+     */
+    private function readManifestData(): array
     {
-        return self::TS_BASE_PATH . $name . '.ts';
+        $manifestFile = $this->getConfig('manifestFile');
+
+        $contents = file_get_contents($manifestFile);
+        if (!$contents) {
+            throw new RuntimeException("Could not read manifest file `{$manifestFile}`");
+        }
+
+        $data = json_decode($contents, true);
+        if (json_last_error()) {
+            throw new RuntimeException("Could not parse JSON in `{$manifestFile}`");
+        }
+
+        return $data;
     }
 }
