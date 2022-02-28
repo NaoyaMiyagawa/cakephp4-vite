@@ -11,13 +11,11 @@ const srcDir = "./resources/js";
 // output dir
 const distDir = `./webroot/js`;
 
-const targetPaths = glob.sync("**/*.+(js|ts)", { cwd: srcDir });
-targetPaths.map((key) => {
+// register entrypoints
+const srcFileKeys = glob.sync("**/*.+(js|ts)", { cwd: srcDir });
+srcFileKeys.map((key) => {
   const srcFilepath = path.join(srcDir, key);
-  // replace path for typescript
-  const distFilepath = key; //.replace(/.ts$/, "");
-  // register entrypoint
-  entries[distFilepath] = srcFilepath;
+  entries[key] = srcFilepath;
 });
 
 console.log("🚀 > entries", entries);
