@@ -9,6 +9,8 @@ With this app, you can use these tech stacks.
 - Scss
 - Vue3
 
+More detailed is here: https://tech.fusic.co.jp/posts/2022-03-03-cakephp-vite-mpa/
+
 ## Installation
 
 ```bash
