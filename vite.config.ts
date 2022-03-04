@@ -18,12 +18,11 @@ srcFileKeys.map((key) => {
   entries[key] = srcFilepath;
 });
 
-console.log("🚀 > entries", entries);
-
 export default defineConfig({
   plugins: [
+    //
     vue(),
-    liveReload(["./templates/**/*.php"], { alwaysReload: true }),
+    liveReload(["./templates/**/*.php"]),
   ],
   build: {
     outDir: distDir,

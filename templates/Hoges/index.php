@@ -3,8 +3,6 @@
 /**
  * @var \App\View\AppView $this
  */
-
-
 $this->disableAutoLayout();
 $this->Vite->script('Hoges/hoge', ['block' => true]);
 ?>
@@ -23,7 +21,10 @@ $this->Vite->script('Hoges/hoge', ['block' => true]);
 </head>
 
 <body>
+    <div id="app"></div>
+
     <?= $this->element('hoge') ?>
+
     <div class="p-4 bg-green-100"></div>
     <div class="p-4 bg-green-200"></div>
     <div class="p-4 bg-green-300"></div>
@@ -34,27 +35,7 @@ $this->Vite->script('Hoges/hoge', ['block' => true]);
     <div class="p-4 bg-green-800"></div>
     <div class="p-4 bg-green-900"></div>
 
-    <div id="app"></div>
 
-    <!-- <div class="p-4 bg-blue-100 "></div>
-    <div class="p-4 bg-blue-200"></div>
-    <div class="p-4 bg-blue-300"></div>
-    <div class="p-4 bg-blue-400"></div>
-    <div class="p-4 bg-blue-500"></div>
-    <div class="p-4 bg-blue-600"></div>
-    <div class="p-4 bg-blue-700"></div>
-    <div class="p-4 bg-blue-800"></div>
-    <div class="p-4 bg-blue-900"></div> -->
-
-    <!-- <div class="p-4 bg-orange-100"></div>
-    <div class="p-4 bg-orange-200"></div>
-    <div class="p-4 bg-orange-300"></div>
-    <div class="p-4 bg-orange-400"></div>
-    <div class="p-4 bg-orange-500"></div>
-    <div class="p-4 bg-orange-600"></div>
-    <div class="p-4 bg-orange-700"></div>
-    <div class="p-4 bg-orange-800"></div>
-    <div class="p-4 bg-orange-900"></div> -->
 
     <?= $this->fetch('script') ?>
 </body>

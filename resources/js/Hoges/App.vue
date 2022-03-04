@@ -6,12 +6,13 @@ const count = ref(0);
 
 <template>
   <div class="p-4">
-    <button @click="count++" class="button">Add: {{ count }}</button>
+    <button @click="count++" class="el_button">Add: {{ count }}</button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.button {
-  @apply p-2 px-6 bg-blue-500 rounded-full;
+.el_button {
+  @apply p-2 px-6 text-white bg-blue-500 rounded-full;
+  // @apply p-4 px-8 text-white bg-green-500 rounded-full;
 }
 </style>

@@ -1,7 +1,7 @@
-// import "@/css/tailwind.css";
-// import "@/css/Hoges/hoge.scss";
-// import { createApp } from "vue";
-// import App from "./App.vue";
+import "@/css/tailwind.css";
+import "@/css/Hoges/hoge.scss";
+import { createApp } from "vue";
+import App from "./App.vue";
 
 export const hoge = () => {
   console.log(`hoge ${count}`);
@@ -13,5 +13,5 @@ setInterval(() => {
   count++;
 }, 1000);
 
-// const app = createApp(App);
-// app.mount("#app");
+const app = createApp(App);
+app.mount("#app");
