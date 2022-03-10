@@ -6,6 +6,7 @@ namespace App\View\Helper;
 
 use Cake\Core\Configure;
 use Cake\View\Helper;
+use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -54,17 +55,22 @@ class ViteHelper extends Helper
      */
     public function script(string $name, $options = []): string
     {
+        if (isset($options['type'])) {
+            throw new InvalidArgumentException('Not allowed to set \'type\' option.');
+        }
+
+        $scriptOptions = $options + ['type' => 'module'];
+
         if (Configure::read('debug')) {
             $filePath = self::VITE_SERVER_URL . self::JS_PREBUILD_PATH . $name;
             $scriptTag = '';
-            $options['type'] = 'module';
 
             if (!$this->hasViteClientEmitted) {
                 $this->hasViteClientEmitted = true;
-                $scriptTag .= $this->Html->script(self::VITE_CLIENT, $options) . '\n';
+                $scriptTag .= $this->Html->script(self::VITE_CLIENT, $scriptOptions) . '\n';
             }
 
-            return $scriptTag . (string)$this->Html->script($filePath, $options);
+            return $scriptTag . (string)$this->Html->script($filePath, $scriptOptions);
         }
 
         $asset = $this->getAssetOnManifest($name);
@@ -73,7 +79,7 @@ class ViteHelper extends Helper
         }
 
         return
-            (string)$this->Html->script($asset['file'], $options)
+            (string)$this->Html->script($asset['file'], $scriptOptions)
             . (string)$this->css($asset, $options);
     }
 
