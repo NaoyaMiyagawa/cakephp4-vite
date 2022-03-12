@@ -15,5 +15,6 @@ class HogesController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->disableAutoLayout();
     }
 }

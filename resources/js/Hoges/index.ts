@@ -1,5 +1,5 @@
 import "@/css/tailwind.css";
-import "@/css/Hoges/hoge.scss";
+import "@/css/Hoges/index.scss";
 import { createApp } from "vue";
 import App from "./App.vue";
 

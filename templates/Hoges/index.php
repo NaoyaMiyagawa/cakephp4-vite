@@ -3,8 +3,7 @@
 /**
  * @var \App\View\AppView $this
  */
-$this->disableAutoLayout();
-$this->Vite->script('Hoges/hoge', ['block' => true]);
+$this->Vite->script('Hoges/index', ['block' => true]);
 ?>
 
 <!DOCTYPE html>
