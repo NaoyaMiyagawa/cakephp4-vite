@@ -1,0 +1,17 @@
+@import "@/css/tailwind.css";
+
+.el_btn {
+    /* width: 100px; */
+    width: 200px;
+    /* background-color: rgb(127, 201, 127); */
+    background-color: rgb(127, 157, 201);
+    padding: 20px;
+    color: white;
+    text-align: center;
+    border-radius: 30px;
+    user-select: none;
+}
+.el_btn:active {
+    background-color: rgb(94, 151, 94);
+    transform: translateY(2px);
+}

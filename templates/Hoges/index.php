@@ -22,8 +22,7 @@ $this->Vite->script('Hoges/index', ['block' => true]);
 <body>
     <div id="app"></div>
 
-    <?= $this->element('hoge') ?>
-
+    <div class="p-4 bg-green-50"></div>
     <div class="p-4 bg-green-100"></div>
     <div class="p-4 bg-green-200"></div>
     <div class="p-4 bg-green-300"></div>
@@ -33,8 +32,6 @@ $this->Vite->script('Hoges/index', ['block' => true]);
     <div class="p-4 bg-green-700"></div>
     <div class="p-4 bg-green-800"></div>
     <div class="p-4 bg-green-900"></div>
-
-
 
     <?= $this->fetch('script') ?>
 </body>

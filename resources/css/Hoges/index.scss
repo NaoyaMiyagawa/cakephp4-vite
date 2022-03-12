@@ -1,7 +1,9 @@
-.hoge {
-    color: white;
-    padding: 10px;
-    button {
-        @apply w-32 p-4 bg-blue-600 border rounded-full text-lime-50 hover:-translate-y-1 active:translate-y-0;
+@import "@/css/tailwind.css";
+
+.el_btn {
+    @apply text-white text-center w-[200px] bg-[#7f9dc9] p-5 rounded-[30px] select-none;
+
+    &:active {
+        @apply bg-[#5e965e] translate-y-[2px];
     }
 }
